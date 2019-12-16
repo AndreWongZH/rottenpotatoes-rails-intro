@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
 		filter = []
 		params[:ratings].each do |rate|
 			filter << rate
+		end
 
 		sort_by = params[:sort_by]
 		if sort_by == 'title'
