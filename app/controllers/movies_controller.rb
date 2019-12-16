@@ -13,8 +13,15 @@ class MoviesController < ApplicationController
 	def index
 		@all_ratings = ['G', 'PG', 'PG-13', 'R']
 		filter = []
-		params[:ratings].each do |rate|
-			filter << rate
+		
+		if params[:ratings] == nil
+			@all_ratings.each do |rate|
+				filter << rate
+			end
+		else
+			params[:ratings].each do |rate|
+				filter << rate
+			end
 		end
 
 		sort_by = params[:sort_by]
