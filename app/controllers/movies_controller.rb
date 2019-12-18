@@ -1,10 +1,5 @@
 class MoviesController < ApplicationController
 
-	after do
-		session[:sort_by] = @sort_by
-		session[:filter] = @filter
-	end
-
 	def movie_params
 		params.require(:movie).permit(:title, :rating, :description, :release_date)
 	end
@@ -48,6 +43,9 @@ class MoviesController < ApplicationController
 		else
 			@movies = Movie.with_ratings(@filter)
 		end
+
+		session[:sort_by] = @sort_by
+		session[:filter] = @filter
 	end
 
 	def new
