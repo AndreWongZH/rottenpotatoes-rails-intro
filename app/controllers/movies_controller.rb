@@ -1,5 +1,12 @@
 class MoviesController < ApplicationController
 
+	enable :sessions
+
+	after do
+		session[:sort_by] = @sort_by
+		session[:filter] = @filter
+	end
+
 	def movie_params
 		params.require(:movie).permit(:title, :rating, :description, :release_date)
 	end
@@ -15,8 +22,14 @@ class MoviesController < ApplicationController
 		@filter = []
 		
 		if params[:ratings] == nil
-			@all_ratings.each do |rate|
-				@filter << rate
+			if session[:filter] != nil
+				session[:filter].each do |rate|
+					@filter << rate[0]
+				end
+			else
+				@all_ratings.each do |rate|
+					@filter << rate[0]
+				end
 			end
 		else
 			params[:ratings].each do |rate|
@@ -24,10 +37,14 @@ class MoviesController < ApplicationController
 			end
 		end
 
-		sort_by = params[:sort_by]
-		if sort_by == 'title'
+		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
+			@sort_by = session[:sort_by]
+		else
+			@sort_by = params[:sort_by]
+
+		if @sort_by == 'title'
 			@movies = Movie.with_ratings(@filter).order(:title)
-		elsif sort_by == 'release_date'
+		elsif @sort_by == 'release_date'
 			@movies = Movie.with_ratings(@filter).order(:release_date)
 		else
 			@movies = Movie.with_ratings(@filter)
