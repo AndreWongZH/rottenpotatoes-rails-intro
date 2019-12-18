@@ -26,11 +26,11 @@ class MoviesController < ApplicationController
 
 		sort_by = params[:sort_by]
 		if sort_by == 'title'
-			@movies = Movie.with_ratings(filter).order(:title)
+			@movies = Movie.with_ratings(@filter).order(:title)
 		elsif sort_by == 'release_date'
-			@movies = Movie.with_ratings(filter).order(:release_date)
+			@movies = Movie.with_ratings(@filter).order(:release_date)
 		else
-			@movies = Movie.with_ratings(filter)
+			@movies = Movie.with_ratings(@filter)
 		end
 	end
 
