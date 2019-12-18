@@ -17,16 +17,16 @@ class MoviesController < ApplicationController
 		if params[:ratings] == nil
 			if session[:filter] != nil
 				session[:filter].each do |rate|
-					@filter << rate[0]
+					@filter << rate
 				end
 			else
 				@all_ratings.each do |rate|
-					@filter << rate[0]
+					@filter << rate
 				end
 			end
 		else
 			params[:ratings].each do |rate|
-				@filter << rate[0]
+				@filter << rate
 			end
 		end
 
