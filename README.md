@@ -7,4 +7,5 @@ course](http://www.saas-class.org) and (non-free)
 To start working on the Rails Intro homework, please follow [the instructions](instructions/README.md).
 
 part 1 complete
+part 2 complete
 
