@@ -36,6 +36,11 @@ class MoviesController < ApplicationController
 			@sort_by = params[:sort_by]
 		end
 
+		@checkerbox = []
+		@filter.each do |filt|
+			@checkerbox << filt[0]
+		end
+
 		if @sort_by == 'title'
 			@movies = Movie.with_ratings(@filter).order(:title)
 		elsif @sort_by == 'release_date'
