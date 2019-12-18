@@ -41,6 +41,7 @@ class MoviesController < ApplicationController
 			@sort_by = session[:sort_by]
 		else
 			@sort_by = params[:sort_by]
+		end
 
 		if @sort_by == 'title'
 			@movies = Movie.with_ratings(@filter).order(:title)
