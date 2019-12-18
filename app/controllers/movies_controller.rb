@@ -1,7 +1,5 @@
 class MoviesController < ApplicationController
 
-	enable :sessions
-
 	after do
 		session[:sort_by] = @sort_by
 		session[:filter] = @filter
