@@ -24,8 +24,6 @@ class MoviesController < ApplicationController
 			end
 		end
 
-		logger.debug @filter
-
 		sort_by = params[:sort_by]
 		if sort_by == 'title'
 			@movies = Movie.with_ratings(@filter).order(:title)
