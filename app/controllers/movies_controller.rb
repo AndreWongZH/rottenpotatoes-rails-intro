@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
 			end
 		else
 			params[:ratings].each do |rate|
-				@filter << rate
+				@filter << rate[0]
 			end
 		end
 
