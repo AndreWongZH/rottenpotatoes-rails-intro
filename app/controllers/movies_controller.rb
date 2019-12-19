@@ -17,6 +17,7 @@ class MoviesController < ApplicationController
 		if params[:ratings] == nil
 			if session[:filter] != nil
 				redirect_to movies_path :ratings => session[:filter]
+				return
 			else
 				@all_ratings.each do |rate|
 					@filter << rate
@@ -30,6 +31,7 @@ class MoviesController < ApplicationController
 
 		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
 			redirect_to movies_path :sort_by => session[:sort_by]
+			return
 		else
 			@sort_by = params[:sort_by]
 		end
