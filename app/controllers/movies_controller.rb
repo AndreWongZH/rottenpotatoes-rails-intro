@@ -11,13 +11,16 @@ class MoviesController < ApplicationController
 	end
 
 	def index
-		@all_ratings = ['G', 'PG', 'PG-13', 'R']
+		@all_ratings = {:G => 1, :PG => 1, :PG-13 => 1, :R => 1}
 		@filter = []
+		should_redirect = false
 		
 		if params[:ratings] == nil
 			if session[:filter] != nil
-				redirect_to movies_path :ratings => session[:filter]
-				return
+				session[:filter].each do |rate|
+					@filter << rate
+				end
+				should_redirect = true 
 			else
 				@all_ratings.each do |rate|
 					@filter << rate
@@ -30,10 +33,15 @@ class MoviesController < ApplicationController
 		end
 
 		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
-			redirect_to movies_path :sort_by => session[:sort_by]
-			return
+			@sort_by => session[:sort_by]
+			should_redirect = true
 		else
 			@sort_by = params[:sort_by]
+		end
+
+		if should_redirect
+			redirect_to movies_path :ratings => @filter, :sort_by => @sort_by
+			return
 		end
 
 		@checkerbox = []
