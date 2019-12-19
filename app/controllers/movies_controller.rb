@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
 		end
 
 		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
-			@sort_by => session[:sort_by]
+			@sort_by = session[:sort_by]
 			should_redirect = true
 		else
 			@sort_by = params[:sort_by]
