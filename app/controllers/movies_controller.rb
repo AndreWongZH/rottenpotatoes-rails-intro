@@ -11,25 +11,19 @@ class MoviesController < ApplicationController
 	end
 
 	def index
-		@all_ratings = ['G', 'PG', 'PG-13', 'R']
-		@filter = []
+		@all_ratings = {'G' => "1", 'PG' => "1", 'PG-13' => "1", 'R' => "1"}
+		@filter = {}
 		should_redirect = false
 		
 		if params[:ratings] == nil
 			if session[:filter] != nil
-				session[:filter].each do |rate|
-					@filter << rate
-				end
+				@filter = session[:filter].clone
 				should_redirect = true 
 			else
-				@all_ratings.each do |rate|
-					@filter << rate
-				end
+				@filter = @all_ratings.clone
 			end
 		else
-			params[:ratings].each do |rate|
-				@filter << rate
-			end
+			@filter = params[:ratings].clone
 		end
 
 		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
