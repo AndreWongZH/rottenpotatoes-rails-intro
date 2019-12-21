@@ -8,4 +8,4 @@ To start working on the Rails Intro homework, please follow [the instructions](i
 
 part 1 complete
 part 2 complete
-
+part 3 complete
