@@ -26,9 +26,14 @@ class MoviesController < ApplicationController
 			@filter = params[:ratings].clone
 		end
 
-		if session[:sort_by] == params[:sort_by] or params[:sort_by] == nil
-			@sort_by = session[:sort_by]
-			should_redirect = true
+		
+		if params[:sort_by] == nil
+			if session[:sort_by] == nil
+				@sort_by = ''
+			else
+				@sort_by = session[:sort_by]
+				should_redirect = true
+			end
 		else
 			@sort_by = params[:sort_by]
 		end
